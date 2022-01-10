@@ -1,5 +1,6 @@
 package club.mineplex.bot.common.mineplex.community;
 
+import club.mineplex.core.minecraft.community.Community;
 import lombok.SneakyThrows;
 import org.jdbi.v3.core.statement.UnableToExecuteStatementException;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
@@ -9,7 +10,7 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.transaction.Transaction;
 
-public interface CommunitiesDatabase {
+public interface CommunityDb {
 
     @Transaction
     @SqlUpdate("CREATE TABLE IF NOT EXISTS community_<table>(`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `messages` BIGINT NOT NULL DEFAULT 0, `kicks` INT NOT NULL DEFAULT 0, `bans` INT NOT NULL DEFAULT 0);")

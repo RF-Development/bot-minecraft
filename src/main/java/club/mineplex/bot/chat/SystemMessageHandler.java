@@ -1,6 +1,6 @@
 package club.mineplex.bot.chat;
 
-import club.mineplex.bot.util.UtilText;
+import club.mineplex.core.util.UtilText;
 import com.github.steveice10.mc.protocol.packet.ingame.clientbound.ClientboundChatPacket;
 import com.github.steveice10.packetlib.Session;
 import lombok.NonNull;

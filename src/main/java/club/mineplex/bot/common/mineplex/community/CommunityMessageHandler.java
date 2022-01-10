@@ -1,11 +1,12 @@
 package club.mineplex.bot.common.mineplex.community;
 
 import club.mineplex.bot.chat.AbstractMessageHandler;
-import club.mineplex.bot.common.cache.GlobalCacheRepository;
-import club.mineplex.bot.common.mineplex.MineplexRank;
 import club.mineplex.bot.common.player.PlayerCache;
-import club.mineplex.bot.common.player.PlayerData;
-import club.mineplex.bot.util.UtilText;
+import club.mineplex.core.cache.GlobalCacheRepository;
+import club.mineplex.core.minecraft.MineplexRank;
+import club.mineplex.core.minecraft.community.Community;
+import club.mineplex.core.minecraft.player.PlayerData;
+import club.mineplex.core.util.UtilText;
 import com.github.steveice10.mc.protocol.packet.ingame.clientbound.ClientboundChatPacket;
 import com.github.steveice10.packetlib.Session;
 import lombok.NonNull;
@@ -13,6 +14,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.TextDecoration;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,8 +78,8 @@ public class CommunityMessageHandler extends AbstractMessageHandler {
 
         // We need to verify that the first component is a community we track
         // The component will be trimmed and case-sensitively matched with the tracked communities
-        final TrackedCommunityCache communityCache = GlobalCacheRepository.getCache(TrackedCommunityCache.class);
-        final List<Community> communities = communityCache.get();
+        final CommunityCache communityCache = GlobalCacheRepository.getCache(CommunityCache.class);
+        final Collection<Community> communities = communityCache.get();
         final Optional<Community> communityOpt = communities
                 .stream()
                 .filter(tracked -> tracked.getName().equals(first.content().trim()))
@@ -118,11 +120,14 @@ public class CommunityMessageHandler extends AbstractMessageHandler {
             }
         }
 
-        final Community.CommunityPlayerData commPlayerData = community.getPlayerData(playerData.getUuid());
-        commPlayerData.setMessages(commPlayerData.getMessages() + 1);
+        final Community.CommunityPlayerData commPlayerData = CommunityManager.getInstance().getPlayerData(
+                community,
+                playerData.getUuid()
+        );
 
         final String content = last.content();
-        new Community.Message(community, playerData, content).postMessage();
+        commPlayerData.setMessages(commPlayerData.getMessages() + 1);
+        CommunityManager.getInstance().postCommunityMessage(new Community.Message(community, playerData, content));
     }
 
     private boolean isBoldOnly(final TextComponent component) {

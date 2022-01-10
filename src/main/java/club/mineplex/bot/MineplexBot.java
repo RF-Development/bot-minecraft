@@ -1,11 +1,12 @@
 package club.mineplex.bot;
 
-import club.mineplex.bot.common.cache.GlobalCacheRepository;
-import club.mineplex.bot.common.mineplex.community.TrackedCommunityCache;
+import club.mineplex.bot.common.mineplex.community.CommunityCache;
 import club.mineplex.bot.common.player.PlayerCache;
-import club.mineplex.bot.database.Database;
 import club.mineplex.bot.listener.ListenerChat;
 import club.mineplex.bot.listener.ListenerConnectDisconnect;
+import club.mineplex.bot.util.UtilFile;
+import club.mineplex.core.cache.GlobalCacheRepository;
+import club.mineplex.core.database.Database;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.steveice10.mc.auth.exception.request.RequestException;
 import com.github.steveice10.mc.auth.service.AuthenticationService;
@@ -70,14 +71,13 @@ public class MineplexBot {
 
     public static void main(final String[] args) {
         ThreadContext.put("serverIP", String.join(":", HOST, String.valueOf(PORT)));
-        Database.getInstance().init();
+        Database.getInstance().init(UtilFile.getAppResource("database.json"));
 
         login();
         fetch(tcpClientSession -> connect());
 
-        GlobalCacheRepository.register(new TrackedCommunityCache());
+        GlobalCacheRepository.register(new CommunityCache());
         GlobalCacheRepository.register(new PlayerCache());
-
 
         final Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {

@@ -4,7 +4,7 @@ import club.mineplex.bot.MineplexBot;
 import club.mineplex.bot.chat.AbstractMessageHandler;
 import club.mineplex.bot.chat.ChatManager;
 import club.mineplex.bot.util.UtilFile;
-import club.mineplex.bot.util.UtilText;
+import club.mineplex.core.util.UtilText;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.github.steveice10.mc.protocol.packet.ingame.clientbound.ClientboundChatPacket;
