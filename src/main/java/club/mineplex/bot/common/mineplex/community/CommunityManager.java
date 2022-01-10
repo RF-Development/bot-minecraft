@@ -160,7 +160,6 @@ public class CommunityManager {
         final CommunityCache cache = GlobalCacheRepository.getCache(CommunityCache.class);
 
         final String[] links = cache.getWebhookLinks(community.getName());
-        System.out.println(links.length);
 
         for (final String webhookLink : links) {
             WebhookMessage.builder()
