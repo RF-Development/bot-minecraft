@@ -1,6 +1,6 @@
 package club.mineplex.bot.common.mineplex.community;
 
-import club.mineplex.core.minecraft.community.Community;
+import club.mineplex.core.mineplex.community.Community;
 import lombok.SneakyThrows;
 import org.jdbi.v3.core.statement.UnableToExecuteStatementException;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;

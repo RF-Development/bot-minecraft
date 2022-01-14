@@ -1,7 +1,7 @@
 package club.mineplex.bot.common.player;
 
 import club.mineplex.core.cache.Cache;
-import club.mineplex.core.minecraft.player.PlayerData;
+import club.mineplex.core.mineplex.player.PlayerData;
 import club.mineplex.core.util.HttpClientUtilities;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;

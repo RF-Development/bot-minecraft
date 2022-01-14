@@ -4,7 +4,7 @@ import club.mineplex.bot.MineplexBot;
 import club.mineplex.bot.util.UtilFile;
 import club.mineplex.core.cache.Cache;
 import club.mineplex.core.database.Database;
-import club.mineplex.core.minecraft.community.Community;
+import club.mineplex.core.mineplex.community.Community;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.json.JsonMapper;
